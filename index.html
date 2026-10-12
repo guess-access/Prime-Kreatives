@@ -480,7 +480,7 @@
 
 <!-- ================= PK CHATBOT ================= -->
 <style>
-#pk-chat-btn{position:fixed;right:22px;bottom:22px;z-index:9999;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#B88917,#E39F0E);color:#1D1F34;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -8px rgba(15,41,76,.5);transition:transform .15s}
+#pk-chat-btn{position:fixed;right:22px;bottom:22px;z-index:9999;width:60px;height:60px;border-radius:50%;border:1px solid rgba(15,41,76,.15);cursor:pointer;background:#fff;color:#1D1F34;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -8px rgba(15,41,76,.5);transition:transform .15s;padding:0;overflow:hidden}
 #pk-chat-btn:hover{transform:translateY(-2px)}
 #pk-chat-dot{position:absolute;top:4px;right:4px;width:13px;height:13px;border-radius:50%;background:#d33;border:2px solid #fff;display:none}
 #pk-chat-panel{position:fixed;right:22px;bottom:94px;z-index:9999;width:min(360px,calc(100vw - 32px));height:480px;max-height:70vh;background:#F4F1EA;border:1px solid rgba(15,41,76,.15);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 60px -18px rgba(15,41,76,.5);font-family:'Work Sans',sans-serif}
@@ -488,7 +488,8 @@
 #pk-chat-head{background:#1D1F34;color:#F4F1EA;padding:14px 16px;display:flex;align-items:center;gap:10px}
 #pk-chat-head .pk-avatar{width:38px;height:38px;border-radius:50%;background:#fff;color:#1D1F34;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;flex:none;overflow:hidden;border:2px solid #FFFFFF}
 #pk-chat-head .pk-avatar img, #pk-chat-head .pk-avatar svg{width:100%;height:100%;object-fit:cover;display:block}
-#pk-chat-btn svg{width:38px;height:38px;border-radius:50%;display:block}
+#pk-chat-btn svg{width:100%;height:100%;border-radius:50%;display:block}
+#pk-chat-btn #pk-chat-icon{display:flex;width:100%;height:100%;align-items:center;justify-content:center}
 #pk-chat-head b{font-family:'Fraunces',serif;font-weight:500;font-size:15px;display:block;line-height:1.2}
 #pk-chat-head small{font-family:'Space Mono',monospace;font-size:10.5px;color:#DDB568;letter-spacing:.06em}
 #pk-chat-head small::before{content:"● ";color:#4ade80}
