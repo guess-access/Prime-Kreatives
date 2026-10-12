@@ -486,7 +486,7 @@
 #pk-chat-panel{position:fixed;left:22px;bottom:94px;z-index:9999;width:min(360px,calc(100vw - 32px));height:480px;max-height:70vh;background:#F4F1EA;border:1px solid rgba(15,41,76,.15);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 60px -18px rgba(15,41,76,.5);font-family:'Work Sans',sans-serif}
 #pk-chat-panel[hidden]{display:none}
 #pk-chat-head{background:#1D1F34;color:#F4F1EA;padding:14px 16px;display:flex;align-items:center;gap:10px}
-#pk-chat-head .pk-avatar{width:38px;height:38px;border-radius:50%;background:#fff;color:#1D1F34;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;flex:none;overflow:hidden;border:2px solid #DDB568}
+#pk-chat-head .pk-avatar{width:38px;height:38px;border-radius:50%;background:#fff;color:#1D1F34;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;flex:none;overflow:hidden;border:2px solid #FFFFFF}
 #pk-chat-head .pk-avatar img, #pk-chat-head .pk-avatar svg{width:100%;height:100%;object-fit:cover;display:block}
 #pk-chat-btn svg{width:38px;height:38px;border-radius:50%;display:block}
 #pk-chat-head b{font-family:'Fraunces',serif;font-weight:500;font-size:15px;display:block;line-height:1.2}
@@ -517,12 +517,12 @@
 #pk-chat-hi .pk-hi-x{position:absolute;top:-9px;right:-9px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(15,41,76,.2);background:#fff;color:#4D5D6D;font-size:12px;line-height:1;cursor:pointer}
 </style>
 
-<button id="pk-chat-btn" aria-label="Open chat"><span id="pk-chat-icon"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#fff"/><circle cx="60" cy="60" r="53" fill="none" stroke="#B88917" stroke-width="6"/><text x="60" y="93" text-anchor="middle" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#0F294C">P</text><polygon points="46,58 48,46 55,52 60,42 65,52 72,46 74,58" fill="#0F294C"/><rect x="46" y="58" width="28" height="5" fill="#0F294C"/><circle cx="48" cy="44" r="2.6" fill="#0F294C"/><circle cx="60" cy="40" r="2.6" fill="#0F294C"/><circle cx="72" cy="44" r="2.6" fill="#0F294C"/></svg></span><span id="pk-chat-dot"></span></button>
+<button id="pk-chat-btn" aria-label="Open chat"><span id="pk-chat-icon"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#fff"/><circle cx="60" cy="60" r="53" fill="none" stroke="#FFFFFF" stroke-width="6"/><text x="60" y="93" text-anchor="middle" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#0F294C">P</text><polygon points="46,58 48,46 55,52 60,42 65,52 72,46 74,58" fill="#0F294C"/><rect x="46" y="58" width="28" height="5" fill="#0F294C"/><circle cx="48" cy="44" r="2.6" fill="#0F294C"/><circle cx="60" cy="40" r="2.6" fill="#0F294C"/><circle cx="72" cy="44" r="2.6" fill="#0F294C"/></svg></span><span id="pk-chat-dot"></span></button>
 <div id="pk-chat-hi" hidden><button class="pk-hi-x" aria-label="Dismiss">×</button><b>Hi! I'm Prime 👋</b><br>How may I help you?</div>
 
 <div id="pk-chat-panel" hidden role="dialog" aria-label="Prime Kreatives chat">
   <div id="pk-chat-head">
-    <div class="pk-avatar"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#fff"/><circle cx="60" cy="60" r="53" fill="none" stroke="#B88917" stroke-width="6"/><text x="60" y="93" text-anchor="middle" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#0F294C">P</text><polygon points="46,58 48,46 55,52 60,42 65,52 72,46 74,58" fill="#0F294C"/><rect x="46" y="58" width="28" height="5" fill="#0F294C"/><circle cx="48" cy="44" r="2.6" fill="#0F294C"/><circle cx="60" cy="40" r="2.6" fill="#0F294C"/><circle cx="72" cy="44" r="2.6" fill="#0F294C"/></svg></div>
+    <div class="pk-avatar"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#fff"/><circle cx="60" cy="60" r="53" fill="none" stroke="#FFFFFF" stroke-width="6"/><text x="60" y="93" text-anchor="middle" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#0F294C">P</text><polygon points="46,58 48,46 55,52 60,42 65,52 72,46 74,58" fill="#0F294C"/><rect x="46" y="58" width="28" height="5" fill="#0F294C"/><circle cx="48" cy="44" r="2.6" fill="#0F294C"/><circle cx="60" cy="40" r="2.6" fill="#0F294C"/><circle cx="72" cy="44" r="2.6" fill="#0F294C"/></svg></div>
     <div><b>Prime</b><small>AI Customer Care · replies instantly</small></div>
     <button id="pk-chat-x" aria-label="Close chat">×</button>
   </div>
