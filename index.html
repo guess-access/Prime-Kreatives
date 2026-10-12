@@ -477,5 +477,190 @@
     r.render(scene,cam);})();
 })();
 </script>
+
+<!-- ================= PK CHATBOT ================= -->
+<style>
+#pk-chat-btn{position:fixed;left:22px;bottom:22px;z-index:9999;width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#B88917,#E39F0E);color:#1D1F34;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -8px rgba(15,41,76,.5);transition:transform .15s}
+#pk-chat-btn:hover{transform:translateY(-2px)}
+#pk-chat-dot{position:absolute;top:4px;right:4px;width:13px;height:13px;border-radius:50%;background:#d33;border:2px solid #fff;display:none}
+#pk-chat-panel{position:fixed;left:22px;bottom:94px;z-index:9999;width:min(360px,calc(100vw - 32px));height:480px;max-height:70vh;background:#F4F1EA;border:1px solid rgba(15,41,76,.15);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 60px -18px rgba(15,41,76,.5);font-family:'Work Sans',sans-serif}
+#pk-chat-panel[hidden]{display:none}
+#pk-chat-head{background:#1D1F34;color:#F4F1EA;padding:14px 16px;display:flex;align-items:center;gap:10px}
+#pk-chat-head .pk-avatar{width:38px;height:38px;border-radius:50%;background:#fff;color:#1D1F34;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:18px;flex:none;overflow:hidden;border:2px solid #DDB568}
+#pk-chat-head .pk-avatar img, #pk-chat-head .pk-avatar svg{width:100%;height:100%;object-fit:cover;display:block}
+#pk-chat-btn svg{width:38px;height:38px;border-radius:50%;display:block}
+#pk-chat-head b{font-family:'Fraunces',serif;font-weight:500;font-size:15px;display:block;line-height:1.2}
+#pk-chat-head small{font-family:'Space Mono',monospace;font-size:10.5px;color:#DDB568;letter-spacing:.06em}
+#pk-chat-head small::before{content:"● ";color:#4ade80}
+#pk-chat-x{margin-left:auto;background:none;border:none;color:rgba(244,241,234,.7);font-size:20px;cursor:pointer;line-height:1}
+#pk-chat-msgs{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:10px;background:#F4F1EA}
+.pk-msg{max-width:82%;padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.5}
+.pk-msg a{color:#0F294C;font-weight:600}
+.pk-bot{background:#fff;border:1px solid rgba(15,41,76,.1);border-bottom-left-radius:4px;color:#1B1D2A;align-self:flex-start}
+.pk-user{background:#0F294C;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.pk-typing{font-style:italic;opacity:.6}
+#pk-chat-quick{display:flex;flex-wrap:wrap;gap:7px;padding:10px 12px;background:#ECE7DC;border-top:1px solid rgba(15,41,76,.1)}
+#pk-chat-quick button{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.04em;border:1px solid rgba(184,137,23,.5);background:#fff;color:#0F294C;border-radius:100px;padding:6px 11px;cursor:pointer}
+#pk-chat-quick button:hover{background:#DDB568}
+#pk-chat-form{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(15,41,76,.1);background:#fff}
+#pk-chat-in{flex:1;border:1px solid rgba(15,41,76,.2);border-radius:100px;padding:10px 14px;font-size:13.5px;font-family:inherit;outline:none}
+#pk-chat-in:focus{border-color:#B88917}
+#pk-chat-send{border:none;border-radius:100px;background:#0F294C;color:#DDB568;padding:10px 16px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.pk-feedback{display:flex;gap:7px;margin-top:8px;flex-wrap:wrap}
+.pk-feedback button{font-family:'Space Mono',monospace;font-size:10px;border:1px solid rgba(184,137,23,.5);background:#F4F1EA;color:#0F294C;border-radius:100px;padding:5px 10px;cursor:pointer}
+.pk-feedback button:hover{background:#DDB568}
+.pk-book{display:block;margin-top:8px;background:#0F294C;color:#fff !important;border-radius:10px;padding:10px 12px;text-decoration:none;font-weight:600}
+.pk-book small{display:block;font-weight:400;opacity:.8;margin-top:3px}
+#pk-chat-hi{position:fixed;left:94px;bottom:30px;z-index:9998;max-width:230px;background:#fff;color:#1B1D2A;border:1px solid rgba(15,41,76,.12);border-radius:14px;border-bottom-left-radius:4px;padding:10px 14px;font-size:13px;line-height:1.45;box-shadow:0 14px 34px -14px rgba(15,41,76,.45);cursor:pointer;font-family:'Work Sans',sans-serif}
+#pk-chat-hi[hidden]{display:none}
+#pk-chat-hi b{color:#0F294C}
+#pk-chat-hi .pk-hi-x{position:absolute;top:-9px;right:-9px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(15,41,76,.2);background:#fff;color:#4D5D6D;font-size:12px;line-height:1;cursor:pointer}
+</style>
+
+<button id="pk-chat-btn" aria-label="Open chat"><span id="pk-chat-icon"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#fff"/><circle cx="60" cy="60" r="53" fill="none" stroke="#B88917" stroke-width="6"/><text x="60" y="93" text-anchor="middle" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#0F294C">P</text><polygon points="46,58 48,46 55,52 60,42 65,52 72,46 74,58" fill="#0F294C"/><rect x="46" y="58" width="28" height="5" fill="#0F294C"/><circle cx="48" cy="44" r="2.6" fill="#0F294C"/><circle cx="60" cy="40" r="2.6" fill="#0F294C"/><circle cx="72" cy="44" r="2.6" fill="#0F294C"/></svg></span><span id="pk-chat-dot"></span></button>
+<div id="pk-chat-hi" hidden><button class="pk-hi-x" aria-label="Dismiss">×</button><b>Hi! I'm Prime 👋</b><br>How may I help you?</div>
+
+<div id="pk-chat-panel" hidden role="dialog" aria-label="Prime Kreatives chat">
+  <div id="pk-chat-head">
+    <div class="pk-avatar"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#fff"/><circle cx="60" cy="60" r="53" fill="none" stroke="#B88917" stroke-width="6"/><text x="60" y="93" text-anchor="middle" font-family="Georgia,serif" font-size="62" font-weight="700" fill="#0F294C">P</text><polygon points="46,58 48,46 55,52 60,42 65,52 72,46 74,58" fill="#0F294C"/><rect x="46" y="58" width="28" height="5" fill="#0F294C"/><circle cx="48" cy="44" r="2.6" fill="#0F294C"/><circle cx="60" cy="40" r="2.6" fill="#0F294C"/><circle cx="72" cy="44" r="2.6" fill="#0F294C"/></svg></div>
+    <div><b>Prime</b><small>AI Customer Care · replies instantly</small></div>
+    <button id="pk-chat-x" aria-label="Close chat">×</button>
+  </div>
+  <div id="pk-chat-msgs"></div>
+  <div id="pk-chat-quick">
+    <button data-q="What services do you offer?">Services</button>
+    <button data-q="Show me work samples">Work</button>
+    <button data-q="What are your prices?">Pricing</button>
+    <button data-q="How do I book a discovery call?">Book a call</button>
+    <button data-q="How can I contact Peter?">Contact</button>
+  </div>
+  <form id="pk-chat-form">
+    <input id="pk-chat-in" placeholder="Type your question…" autocomplete="off" />
+    <button id="pk-chat-send" type="submit">Send</button>
+  </form>
+</div>
+
+<script>
+(function(){
+  var panel=document.getElementById('pk-chat-panel'),
+      btn=document.getElementById('pk-chat-btn'),
+      icon=document.getElementById('pk-chat-icon'),
+      msgs=document.getElementById('pk-chat-msgs'),
+      form=document.getElementById('pk-chat-form'),
+      input=document.getElementById('pk-chat-in'),
+      opened=false;
+
+  function showDot(){var d=document.getElementById('pk-chat-dot');if(d)d.style.display='block';}
+  function hideDot(){var d=document.getElementById('pk-chat-dot');if(d)d.style.display='none';}
+  function showHi(){var h=document.getElementById('pk-chat-hi');if(h&&!opened)h.removeAttribute('hidden');}
+  function hideHi(){var h=document.getElementById('pk-chat-hi');if(h)h.setAttribute('hidden','');}
+  var ICON_OPEN='✕';
+  var ICON_CLOSED=icon.innerHTML;
+
+  var BOOK_CARD="<br><br>📅 <b>Want Peter to sort this personally?</b><a class='pk-book' href='discovery-call.html'>Book a free discovery call →<small>20–30 min · scope + timeline · reply within 1 business day</small></a><span style='font-size:12px'>Or <a href='mailto:prime.kreatives@gmail.com'>email</a> · <a href='tel:+639691556228'>+63 969 155 6228</a></span>";
+  var FEEDBACK="<div class='pk-feedback'><span style='font-size:12px;opacity:.7'>Was this helpful?</span><button data-fb='yes'>👍 Yes</button><button data-fb='no'>👎 No — book a call</button></div>";
+
+  var NO_WORDS=['not helpful','didn\'t help','didnt help','not satisfied','unsatisfied','still confused','still don\'t','still dont','useless','wrong answer','talk to human','real person','talk to peter','speak to peter','speak to someone','escalate','complaint','frustrat','annoyed','no help'];
+  var YES_WORDS=['yes helpful','that helps','thanks that','perfect thanks','all good','solved','got it thanks'];
+
+  var RULES=[
+    {k:['price','cost','rate','fee','charge','quote','how much','payment','budget'],a:"Pricing is custom per scope — no flat rate on the site. After a free discovery call you get a clear scope + quote. <a href='discovery-call.html'>Request a quote here</a>."},
+    {k:['book','discovery','appointment','schedule','meeting','consult','reserve a slot','calendar'],a:"Booking is easy: open the <a href='discovery-call.html'>Discovery Call page</a>, fill name + email + what you need, pick a day/time in the embedded Google calendar, and hit Send. Peter replies within <b>1 business day</b>."},
+    {k:['what happens on the call','what happens in','how long is the call','how long is discovery','prepare for the call','what to prepare'],a:"It's a focused <b>20–30 min call, no obligation</b>: 1) review your tools/workflow/bottlenecks, 2) you leave with scope + timeline + next step. Just bring what's piling up — reporting, admin, or a breaking process."},
+    {k:['service','offer','what do you do','skill','capabilit','help with'],a:"Peter covers 8 areas: 1) Client Success & Account Mgmt, 2) Executive & Multi-Principal Support, 3) Team Leadership & Coaching, 4) SLA & KPI Monitoring, 5) Client-Facing Reporting, 6) SOPs & Process Improvement, 7) AI Integration & Automation, 8) AU Mortgage support. Details in <a href='#skills'>Skills</a>."},
+    {k:['executive assistant','ea support','admin support','virtual assistant','multi-principal','chief of staff','inbox','calendar management'],a:"Yes — Peter runs point for <b>3 principals at once</b> (AU mortgage broker, 2 BPO ops leaders, COO of a staffing firm): inbox, comms, follow-ups, day-to-day ops with minimal oversight. <a href='#about'>How he works</a>."},
+    {k:['client success','account manage','retention','churn','relationship'],a:"Peter owns relationships end-to-end — <b>30 client accounts</b> across healthcare, finance, automotive & sales. Focus: retention, SLA tracking, and reporting clients actually read."},
+    {k:['report','dashboard','tracker','kpi','sla','data base','heatmap','attendance','timelog','spreadsheet','google data studio'],a:"Reporting is the flagship: Appointment Dashboard, Timelogs, Client Heatmap (HubSpot), Career Match Tool, Manager KPI Tracker, Attendance & Cluster Reports — built on Apps Script + Data Studio + HubSpot. Browse <a href='reporting-data-base.html'>Reporting & Data Base</a>."},
+    {k:['sop','automation','workflow','process improv','zapier','streamline','manual work'],a:"Peter documents the way work <i>should</i> run, then automates it — SOPs, workflow automations & process fixes that cut manual work. See <a href='automated-process-sops.html'>SOPs & Automation</a> (sample page in progress — ask on the call for live examples)."},
+    {k:['logo','design','brand identity','merch','canva','figma','deck','one-pager','presentation'],a:"Design side: full logo suites (primary/submark/favicon), merch, one-pagers & client-ready decks. Examples: <a href='designs-brand-logos.html'>Designs & Logos</a> + <a href='brand-color-guide.html'>Brand Guide</a>."},
+    {k:['brand','color','palette','navy','gold','guide'],a:"Official palette: Navy #0F294C, Indigo #1D1F34, Gold #B88917, Sand #DDB568, Paper #F4F1EA — with usage rules. Open the <a href='brand-color-guide.html'>Brand Guide</a>."},
+    {k:['work','portfolio','sample','project','case study','proof','results'],a:"3 galleries: <a href='reporting-data-base.html'>Reporting & Data</a> (7 dashboards), <a href='automated-process-sops.html'>SOPs & Automation</a>, <a href='designs-brand-logos.html'>Designs & Logos</a> (logo suites, merch). Start at <a href='#work'>Work samples</a>."},
+    {k:['who is peter','about peter','background','experience','qualification','credential','six sigma','degree','resume','cv'],a:"<b>Peter Brier Lee</b>, Cebu City PH — 10 yrs BPO: frontline → SME → Team Lead → Assistant Ops Manager → Client Success Manager. Six Sigma Yellow Belt, BS Hotel & Restaurant Mgmt. Languages: EN · Filipino · Bisaya · Chavacano. Full story in <a href='#about'>About</a>."},
+    {k:['who do you work with','industr','client type','healthcare','finance','automotive','staffing','bpo'],a:"Today: an Australian mortgage broker, two BPO operations leaders, and a staffing-company COO. Past: 30 accounts across <b>healthcare, finance, automotive & sales</b>. Comfortable as an extension of leadership."},
+    {k:['tool','software','hubspot','salesforce','crm','nextiva','zoho','monday','notion','tech stack','apps script'],a:"CRM & ops: HubSpot, Salesforce, Nextiva, Zoho, Monday.com. Build: Canva, Figma, HTML/JS, Google Apps Script, Claude, Netlify, Zapier, Notion, GitHub. Full grid in <a href='#tools'>Tools</a>."},
+    {k:['mortgage','australia','australian','nccp','asic','afca','broker','compliance'],a:"Yes — working knowledge of <b>NCCP, ASIC & AFCA</b> from supporting an AU mortgage broker. Bring compliance-sensitive workflows to the <a href='discovery-call.html'>discovery call</a> and he'll scope carefully."},
+    {k:['where','location','cebu','philippines','timezone','remote','hours','availability','available','turnaround','how fast','start'],a:"Based in <b>Cebu City, Philippines</b>, working remotely with AU/US clients — async-friendly with AU-hours overlap. Discovery replies within 1 business day; project timelines are set on the call."},
+    {k:['how it works','how to start','onboard','process','next step','get started'],a:"1) <a href='discovery-call.html'>Send a request</a> → 2) 20–30 min call → 3) scope + timeline + quote → 4) kickoff. Or email <a href='mailto:prime.kreatives@gmail.com'>prime.kreatives@gmail.com</a>."},
+    {k:['revision','guarantee','refund','not happy','don\'t like','dont like','quality'],a:"Every deliverable is treated like it's going in front of your most important client — polished & on-brand. If scope needs adjusting, that's exactly what the <a href='discovery-call.html'>discovery call</a> locks in before work starts."},
+    {k:['ai ','artificial intelligence','chatgpt','claude','automate with ai','gemini'],a:"Peter folds AI (Claude, ChatGPT-style tooling + Apps Script/Zapier) into everyday workflows to move faster without getting sloppy — reporting, follow-ups, first drafts. Ask for examples on the call."},
+    {k:['privacy','confidential','nda','data secur','share data','access'],a:"Client data stays confidential — access only as needed to deliver, never shared. Happy to sign an NDA; raise it in the <a href='discovery-call.html'>request notes</a>."},
+    {k:['contact','email','phone','reach','number','whatsapp','talk','call you','speak'],a:"Reach Peter at <a href='mailto:prime.kreatives@gmail.com'>prime.kreatives@gmail.com</a> or <a href='tel:+639691556228'>+63 969 155 6228</a> — or use the <a href='#contact'>contact section</a>."},
+    {k:['hi','hello','hey','good morning','good afternoon','good evening','kumusta'],a:"Hi! I'm Prime, your AI Customer Care, how may I help you? You can ask about <b>services, pricing, work samples, booking, or contact</b>."},
+    {k:['thank','salamat','great','awesome','perfect'],a:"You're welcome! Anything else — services, samples, or booking?"},
+    {k:['bye','goodbye','see you'],a:"Thanks for stopping by Prime Kreatives — the crown stays polished. 👑 <a href='discovery-call.html'>Book anytime</a>!"}
+  ];
+  var misses=0;
+
+  function add(text,who){
+    var d=document.createElement('div');
+    d.className='pk-msg '+(who==='user'?'pk-user':'pk-bot');
+    if(who==='user'){d.textContent=text;}else{d.innerHTML=text;}
+    msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
+    return d;
+  }
+  function match(q){
+    var s=q.toLowerCase();
+    for(var i=0;i<RULES.length;i++){
+      for(var j=0;j<RULES[i].k.length;j++){
+        if(s.indexOf(RULES[i].k[j])!==-1)return RULES[i].a;
+      }
+    }
+    return null;
+  }
+  function isNo(s){s=s.toLowerCase();for(var i=0;i<NO_WORDS.length;i++){if(s.indexOf(NO_WORDS[i])!==-1)return true;}if(s==='no'||s==='nope'||s==='nah')return true;return false;}
+  function botSay(text,askFb){
+    var t=add('typing…','pk-bot');t.classList.add('pk-typing');
+    setTimeout(function(){
+      t.innerHTML=text+(askFb?FEEDBACK:'');
+      t.classList.remove('pk-typing');msgs.scrollTop=msgs.scrollHeight;
+      if(askFb){wireFeedback(t);}
+    },450);
+  }
+  function wireFeedback(scope){
+    var btns=scope.querySelectorAll('[data-fb]');
+    btns.forEach(function(b){
+      b.addEventListener('click',function(){
+        if(b.getAttribute('data-fb')==='yes'){botSay("Great — glad that helped! Anything else I can answer, or shall I point you to <a href='#work'>work samples</a>?",false);}
+        else{misses=0;botSay("Sorry about that — let's get Peter on it."+BOOK_CARD,false);}
+      });
+    });
+  }
+  function escalate(){
+    misses=0;
+    botSay("I don't want to leave you hanging — this one needs Peter's eyes."+BOOK_CARD,false);
+  }
+  function send(q){
+    q=(q||'').trim();if(!q)return;
+    add(q,'user');input.value='';
+    var low=q.toLowerCase();
+    setTimeout(function(){
+      if(isNo(low)){botSay("Understood — let's get you to Peter directly."+BOOK_CARD,false);return;}
+      var a=match(q);
+      if(a){misses=0;botSay(a,true);}
+      else{
+        misses++;
+        if(misses>=2){escalate();}
+        else{botSay("I want to make sure you get the right answer — I can cover <b>services, pricing, booking, work samples, tools, or contact</b>. Could you rephrase, or tap a button below? If it's urgent, skip the wait:"+BOOK_CARD,false);}
+      }
+    },150);
+  }
+  btn.addEventListener('click',function(){
+    var open=panel.hasAttribute('hidden');
+    if(open){panel.removeAttribute('hidden');hideDot();hideHi();icon.textContent=ICON_OPEN;
+      if(!opened){opened=true;botSay("Hi! I'm Prime, your AI Customer Care, how may I help you?");}}
+    else{panel.setAttribute('hidden','');icon.innerHTML=ICON_CLOSED;}
+  });
+  document.getElementById('pk-chat-x').addEventListener('click',function(){panel.setAttribute('hidden','');icon.innerHTML=ICON_CLOSED;});
+  form.addEventListener('submit',function(e){e.preventDefault();send(input.value);});
+  document.querySelectorAll('#pk-chat-quick button').forEach(function(b){
+    b.addEventListener('click',function(){send(b.getAttribute('data-q'));});
+  });
+  setTimeout(function(){if(!opened){showDot();showHi();}},3000);
+  document.getElementById('pk-chat-hi').addEventListener('click',function(e){
+    if(e.target.classList&&e.target.classList.contains('pk-hi-x')){hideHi();return;}
+    btn.click();
+  });
+})();
+</script>
 </body>
 </html>
