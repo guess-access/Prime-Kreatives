@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Request a Discovery Call â€” Prime Kreatives</title>
+<title>Request a Discovery Call - Prime Kreatives</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -100,22 +100,31 @@
   input::placeholder,textarea::placeholder{color:rgba(77,93,109,.6);}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 
-  /* ---- booking calendar embed (flush under the time input) ---- */
+  /* ---- dummy scheduler (no external calendar) ---- */
   .cal-field{gap:0;}
   .cal-field label{margin-bottom:6px;}
-  .cal-embed{
-    background:var(--navy);border:1px solid rgba(184,137,23,.45);border-radius:12px;
-    overflow:hidden;line-height:0;
-  }
-  .cal-embed iframe{display:block;width:100%;height:640px;border:0;background:#fff;}
-  .cal-alt{
-    display:inline-flex;align-items:center;gap:7px;margin-top:9px;align-self:flex-start;
-    text-decoration:none;font-family:'Space Mono',monospace;font-size:11.5px;
-    letter-spacing:.05em;color:var(--gold);transition:color .15s ease;
-  }
-  .cal-alt:hover,.cal-alt:focus-visible{color:var(--navy);}
-  .cal-alt svg{width:14px;height:14px;flex:none;}
-
+  .dummy-cal{background:#fff;border:1px solid rgba(27,29,42,.14);border-radius:12px;overflow:hidden;margin-top:10px;}
+  .dc-head{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:var(--paper);padding:12px 14px;}
+  .dc-head div{font-family:'Fraunces',serif;font-size:17px;}
+  .dc-head button{width:32px;height:32px;border-radius:50%;border:1px solid rgba(221,181,104,.5);background:transparent;color:var(--sand);font-size:16px;line-height:1;cursor:pointer;}
+  .dc-head button:hover:not(:disabled){background:rgba(221,181,104,.15);}
+  .dc-head button:disabled{opacity:.3;cursor:default;}
+  .dc-week{display:grid;grid-template-columns:repeat(7,1fr);background:var(--paper2);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);text-align:center;padding:8px 10px 6px;}
+  .dc-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:12px;}
+  .dc-grid button{aspect-ratio:1;border:0;background:transparent;border-radius:50%;font-family:'Work Sans',sans-serif;font-size:13.5px;color:var(--ink);cursor:pointer;}
+  .dc-grid button:hover:not(:disabled){background:var(--paper2);}
+  .dc-grid button.sel{background:var(--gold);color:#fff;font-weight:700;}
+  .dc-grid button:disabled{color:rgba(77,93,109,.3);cursor:default;}
+  .dc-grid button.today{outline:2px solid var(--gold);outline-offset:-2px;}
+  .dc-slots{border-top:1px solid rgba(27,29,42,.1);padding:14px;}
+  .dc-slots-label{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:10px;}
+  .dc-slotrow{display:flex;flex-wrap:wrap;gap:8px;}
+  .dc-slotrow button{font-family:'Space Mono',monospace;font-size:11.5px;padding:9px 15px;border-radius:100px;border:1px solid rgba(15,41,76,.25);background:#fff;color:var(--navy);cursor:pointer;}
+  .dc-slotrow button:hover:not(:disabled){border-color:var(--gold);}
+  .dc-slotrow button.sel{background:var(--navy);border-color:var(--navy);color:var(--sand);font-weight:700;}
+  .dc-slotrow button:disabled{opacity:.4;text-decoration:line-through;cursor:default;}
+  .dc-pick{margin:0;padding:0 14px 14px;font-size:12.5px;color:var(--slate);}
+  .dc-pick strong{color:var(--navy);}
   .submit-row{margin-top:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
   .btn{
     font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
@@ -174,12 +183,12 @@
       <div class="mark"><svg viewBox="421.5 303.5 1230 1392" xmlns="http://www.w3.org/2000/svg" fill="currentColor" focusable="false" aria-hidden="true"><path d="M 544,353.5 473,354.5 471.5,356 471.5,1644 486,1645.5 631,1645.5 632.5,1641 632.5,490 635,488.5 1120,488.5 1149,490.5 1197,500.5 1228,511.5 1257,524.5 1292,545.5 1323,569.5 1343.5,589 1367.5,617 1392.5,656 1403.5,678 1419.5,721 1429.5,765 1432.5,796 1431.5,849 1424.5,891 1417.5,914 1402.5,951 1391.5,971 1374.5,998 1352.5,1025 1326,1051.5 1286,1081.5 1246,1102.5 1221,1112.5 1188,1121.5 1159,1126.5 1135,1128.5 735,1128.5 732.5,1130 732.5,1643 734,1644.5 755,1645.5 1546,1644.5 1547.5,1643 1547.5,1493 1546,1491.5 904,1491.5 891,1490.5 889.5,1486 889.5,1267 891,1263.5 1127,1263.5 1154,1262.5 1165,1260.5 1186,1260.5 1246,1250.5 1293,1237.5 1325,1225.5 1361,1208.5 1394,1189.5 1428,1165.5 1451,1146.5 1487.5,1111 1509.5,1085 1531.5,1054 1552.5,1018 1567.5,986 1576.5,963 1583.5,940 1584.5,932 1586.5,929 1591.5,903 1593.5,899 1600.5,851 1601.5,785 1595.5,731 1586.5,690 1576.5,658 1567.5,634 1547.5,592 1535.5,571 1514.5,540 1483.5,503 1462,481.5 1432,455.5 1390,425.5 1350,403.5 1305,384.5 1275,374.5 1224,362.5 1184,356.5 1124,353.5Z M 1000,727.5 989,730.5 978,737.5 968.5,750 965.5,759 965.5,776 969.5,786 983,800.5 991,804.5 994,804.5 998.5,808 981.5,842 910.5,968 890.5,1007 887,1010.5 725.5,884 724.5,882 734.5,870 738.5,859 738.5,844 736.5,837 732.5,830 726,823.5 715,816.5 700,814.5 692,816.5 682,821.5 670.5,833 666.5,841 665.5,853 667.5,865 673.5,875 686,884.5 696,887.5 710,887.5 712.5,891 717.5,923 721.5,938 721.5,949 727.5,981 727.5,992 734.5,1033 734.5,1042 739.5,1069 739.5,1077 742,1084.5 758,1086.5 1171,1085.5 1186,1082.5 1195,1082.5 1227,1074.5 1251,1065.5 1261,1060.5 1264.5,1057 1276.5,996 1281.5,962 1283.5,957 1283.5,950 1290.5,920 1295.5,887 1297,885.5 1302,887.5 1320,886.5 1331,881.5 1339.5,873 1343.5,867 1346.5,857 1346.5,844 1340.5,830 1329,819.5 1316,814.5 1305,814.5 1290,820.5 1284.5,825 1278.5,833 1275.5,840 1274.5,852 1276.5,863 1285.5,880 1118,1004.5 1110.5,993 1069.5,914 1059.5,898 1011.5,809 1013,806.5 1018,805.5 1027,800.5 1038.5,788 1043.5,775 1043.5,759 1041.5,752 1037.5,745 1025,733.5 1009,727.5Z"/></svg></div>
       <div class="eyebrow">Discovery call</div>
       <h1>Let's map out what you need.</h1>
-      <p class="sub">Tell us where the work is piling up â€” reporting, admin support, or a process that keeps breaking. We'll reply within one business day to book a short discovery call.</p>
+      <p class="sub">Tell us where the work is piling up - reporting, admin support, or a process that keeps breaking. We'll reply within one business day to book a short discovery call.</p>
 
       <div class="points">
         <div class="point">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>A focused 20â€“30 minute call, no obligation.</span>
+          <span>A focused 20-30 minute call, no obligation.</span>
         </div>
         <div class="point">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
@@ -242,15 +251,18 @@
               </select>
             </div>
             <div class="field full cal-field">
-              <label for="dc-time">Preferred day &amp; time</label>
-              <input id="dc-time" name="preferred-time" type="text" placeholder="e.g. Tueâ€“Thu, mornings (PHT)">
-              <div class="cal-embed">
-                <iframe src="https://calendar.app.google/RdJVhQDWmFXWXGaYA" title="Book a discovery call with Prime Kreatives" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <label>Preferred day &amp; time</label>
+              <input id="dc-time" name="preferred-time" type="hidden" value="">
+              <div class="dummy-cal" id="dummyCal">
+                <div class="dc-head"><button type="button" id="dcPrev" aria-label="Previous month">&#8249;</button><div id="dcMonth">Month</div><button type="button" id="dcNext" aria-label="Next month">&#8250;</button></div>
+                <div class="dc-week"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+                <div class="dc-grid" id="dcGrid"></div>
+                <div class="dc-slots" id="dcSlots" hidden>
+                  <div class="dc-slots-label">Available times (PHT)</div>
+                  <div class="dc-slotrow" id="dcSlotRow"></div>
+                </div>
+                <p class="dc-pick" id="dcPick">Pick a day, then a time. Your choice fills the field above.</p>
               </div>
-              <a class="cal-alt" href="https://calendar.app.google/RdJVhQDWmFXWXGaYA" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
-                Not loading? Open the calendar in a new tab
-              </a>
             </div>
             <div class="field full">
               <label for="dc-notes">Project notes <span class="req">*</span></label>
@@ -270,17 +282,13 @@
 
       <div class="sent" id="sent" hidden>
         <h3>Request received</h3>
-        <p>Thanks â€” we've got your details and will reply within one business day. If you'd rather not wait, grab a slot yourself:</p>
-        <a class="btn" href="https://calendar.app.google/RdJVhQDWmFXWXGaYA" target="_blank" rel="noopener noreferrer">
-          Book a slot now
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
+        <p>Thanks - we've got your details and will reply within one business day.</p>
         <a class="btn btn-ghost" href="index.html">Back to home</a>
       </div>
 
       <div class="sent" id="fallback" hidden>
         <h3>Send it from your email app</h3>
-        <p>We couldn't deliver this automatically, so nothing has been sent yet. Your email app should open with the request already filled in â€” if it doesn't, write to us directly and we'll take it from there.</p>
+        <p>We couldn't deliver this automatically, so nothing has been sent yet. Your email app should open with the request already filled in - if it doesn't, write to us directly and we'll take it from there.</p>
         <a class="btn" id="fallback-mail" href="mailto:prime.kreatives@gmail.com">
           Open my email app
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -296,6 +304,7 @@
 (function(){
   var form = document.getElementById('dc-form');
   var btn = document.getElementById('dc-submit');
+  var btnHTML = btn ? btn.innerHTML : '';
   if(!form) return;
 
   /* Where requests are delivered. EMAIL is the address that must receive every
@@ -329,18 +338,18 @@
     if(data.get('preferred-time')) lines.push('Preferred time: '+data.get('preferred-time'));
     lines.push('', String(data.get('notes')||''));
     var href = 'mailto:' + EMAIL
-      + '?subject=' + encodeURIComponent('Discovery call request â€” ' + (data.get('name')||''))
+      + '?subject=' + encodeURIComponent('Discovery call request - ' + (data.get('name')||''))
       + '&body=' + encodeURIComponent(lines.join('\n'));
     var alt = document.getElementById('fallback-mail');
     if(alt) alt.setAttribute('href', href);
+    if(btn){btn.disabled=false;btn.innerHTML=btnHTML;}
     showFallback();
-    window.location.href = href;
   }
 
   /* Payload for the email delivery leg. */
   function emailPayload(fd){
     var p = {
-      _subject: 'Discovery call request â€” ' + (fd.get('name') || 'website'),
+      _subject: 'Discovery call request - ' + (fd.get('name') || 'website'),
       _template: 'table',
       '_replyto': fd.get('email') || '',
       'Full name':     fd.get('name') || '',
@@ -377,10 +386,10 @@
     fd.forEach(function(v, k){ if (k !== 'bot-field') body.append(k, v); });
 
     btn.disabled = true;
-    btn.textContent = 'Sendingâ€¦';
+    btn.textContent = 'Sending...';
 
     settleAll([
-      { /* 1 â€” copy into the Netlify Forms dashboard */
+      { /* 1 - copy into the Netlify Forms dashboard */
         run: function(){
           return fetch('/', {
             method: 'POST',
@@ -389,13 +398,13 @@
           });
         },
         /* a plain host answers with an HTML page, so only count it when the
-           response is not HTML â€” real Netlify returns an empty text response */
+           response is not HTML - real Netlify returns an empty text response */
         accept: function(r){
           var ct = (r.headers.get('content-type') || '');
           return !!(r.ok && ct.indexOf('text/html') === -1);
         }
       },
-      { /* 2 â€” the request that must reach the inbox */
+      { /* 2 - the request that must reach the inbox */
         run: function(){
           return fetch(ENDPOINT, {
             method: 'POST',
@@ -423,6 +432,73 @@
       }
     });
   });
+})();
+</script>
+<script>
+/* Dummy scheduler: month grid + time slots, feeds the #dc-time field. No backend. */
+(function(){
+  var grid=document.getElementById('dcGrid');
+  var monthEl=document.getElementById('dcMonth');
+  var slotsBox=document.getElementById('dcSlots');
+  var slotRow=document.getElementById('dcSlotRow');
+  var pick=document.getElementById('dcPick');
+  var timeInput=document.getElementById('dc-time');
+  if(!grid||!timeInput)return;
+  var TIMES=['9:00 AM','10:30 AM','1:00 PM','2:30 PM','4:00 PM'];
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var today=new Date(); today.setHours(0,0,0,0);
+  var cur=new Date(today.getFullYear(),today.getMonth(),1);
+  var selDay=null, selSlot=null;
+  function key(d){return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
+  function fmt(d){return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+  function render(){
+    monthEl.textContent=MONTHS[cur.getMonth()]+' '+cur.getFullYear();
+    document.getElementById('dcPrev').disabled=(cur.getFullYear()===today.getFullYear()&&cur.getMonth()===today.getMonth());
+    var max=new Date(today.getFullYear(),today.getMonth()+3,0);
+    document.getElementById('dcNext').disabled=(cur.getFullYear()===max.getFullYear()&&cur.getMonth()===max.getMonth());
+    grid.innerHTML='';
+    var off=(new Date(cur.getFullYear(),cur.getMonth(),1).getDay()+6)%7;
+    for(var k=0;k<off;k++){var s=document.createElement('span');grid.appendChild(s);}
+    var dim=new Date(cur.getFullYear(),cur.getMonth()+1,0).getDate();
+    for(var d=1;d<=dim;d++){
+      (function(day){
+        var dt=new Date(cur.getFullYear(),cur.getMonth(),day);
+        var b=document.createElement('button');
+        b.type='button';b.textContent=day;
+        if(dt<today){b.disabled=true;}
+        else{
+          if(fmt(dt)===fmt(today))b.classList.add('today');
+          if(selDay&&key(selDay)===key(dt))b.classList.add('sel');
+          b.addEventListener('click',function(){selDay=dt;selSlot=null;render();renderSlots();});
+        }
+        grid.appendChild(b);
+      })(d);
+    }
+  }
+  function renderSlots(){
+    slotRow.innerHTML='';
+    if(!selDay){slotsBox.hidden=true;pick.innerHTML='Pick a day, then a time.';return;}
+    slotsBox.hidden=false;
+    TIMES.forEach(function(t,ix){
+      var b=document.createElement('button');
+      b.type='button';b.textContent=t;
+      if((selDay.getDate()+ix*2)%4===0){b.disabled=true;b.title='Already booked';}
+      else{
+        if(selSlot===t)b.classList.add('sel');
+        b.addEventListener('click',function(){
+          selSlot=(selSlot===t)?null:t;
+          if(selSlot){timeInput.value=fmt(selDay)+' - '+selSlot+' PHT';pick.innerHTML='Selected: <strong>'+timeInput.value+'</strong> - tap it again to clear.';}
+          else{timeInput.value='';pick.innerHTML='Pick a day, then a time.';}
+          renderSlots();
+        });
+      }
+      slotRow.appendChild(b);
+    });
+    if(!selSlot)pick.innerHTML='Picked <strong>'+fmt(selDay)+'</strong> - now choose a time below.';
+  }
+  document.getElementById('dcPrev').addEventListener('click',function(){cur=new Date(cur.getFullYear(),cur.getMonth()-1,1);render();});
+  document.getElementById('dcNext').addEventListener('click',function(){cur=new Date(cur.getFullYear(),cur.getMonth()+1,1);selDay=null;selSlot=null;timeInput.value='';render();renderSlots();});
+  render();renderSlots();
 })();
 </script>
 
