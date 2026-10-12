@@ -397,11 +397,13 @@
             body: body.toString()
           });
         },
-        /* a plain host answers with an HTML page, so only count it when the
-           response is not HTML - real Netlify returns an empty text response */
+        /* Netlify answers 2xx only when it accepted the submission. (The old
+           non-HTML check was wrong here: with action="#sent" the final
+           response after redirect is this same page, i.e. HTML, so every
+           real save was miscounted as a failure.) On a plain file host the
+           fetch itself rejects, so this cannot false-positive locally. */
         accept: function(r){
-          var ct = (r.headers.get('content-type') || '');
-          return !!(r.ok && ct.indexOf('text/html') === -1);
+          return !!r.ok;
         }
       },
       { /* 2 - the request that must reach the inbox */
