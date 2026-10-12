@@ -222,6 +222,7 @@
   .foot-brand{display:flex;gap:14px;align-items:center;}
   .foot-logo{width:56px;height:56px;border-radius:50%;flex:none;background:#fff;border:2px solid var(--sand);overflow:hidden;}
   .foot-logo svg{width:100%;height:100%;display:block;}
+  .foot-logo-img{max-width:290px;width:100%;height:auto;display:block;}
   .foot-name{font-family:'Fraunces',serif;font-size:24px;font-weight:500;color:var(--sand);line-height:1.1;}
   .foot-tag{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:rgba(244,241,234,.78);}
   .foot-bio{font-size:13.5px;margin-top:14px;max-width:340px;color:rgba(244,241,234,.62);}
@@ -229,6 +230,7 @@
   .foot-social a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(221,181,104,.4);display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;}
   .foot-social a:hover{background:rgba(221,181,104,.15);transform:translateY(-2px);}
   .foot-social img{width:19px;height:19px;display:block;}
+  .foot-social svg{width:19px;height:19px;display:block;}
   .foot-h{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);margin-bottom:16px;}
   .foot-links{list-style:none;display:grid;gap:10px;font-size:14px;margin:0;padding:0;}
   .foot-links a{color:rgba(244,241,234,.7);text-decoration:none;}
@@ -238,6 +240,8 @@
   .foot-contact a:hover{color:var(--sand);}
   .foot-base{border-top:1px solid rgba(244,241,234,.1);padding:20px 0;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;text-align:center;color:rgba(244,241,234,.45);}
   .foot-base span{color:var(--sand);}
+  .foot-base a{color:var(--sand);text-decoration:none;}
+  .foot-base a:hover{text-decoration:underline;}
   @media(max-width:760px){.foot-grid{grid-template-columns:1fr;padding:40px 0 28px;}}
 
   @media(max-width:600px){
@@ -438,15 +442,13 @@
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <div class="foot-brand">
-        <div class="foot-logo"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="57" fill="#fff"/><circle cx="60" cy="60" r="54" fill="none" stroke="#B88917" stroke-width="2.5"/><path d="M41,90 V34 H66 A17,17 0 0 1 66,68 H47" fill="none" stroke="#1B2A4D" stroke-width="11"/><path d="M47,68 V84 H78" fill="none" stroke="#1B2A4D" stroke-width="11"/><polygon points="43,57 45,47 50,52 54,44 58,52 63,47 65,57" fill="#1B2A4D"/><rect x="43" y="57" width="22" height="4.5" fill="#1B2A4D"/><circle cx="45" cy="45" r="2.2" fill="#1B2A4D"/><circle cx="54" cy="42" r="2.2" fill="#1B2A4D"/><circle cx="63" cy="45" r="2.2" fill="#1B2A4D"/></svg></div>
-        <div><div class="foot-name">Prime Kreatives</div><div class="foot-tag">Where vision meets execution.</div></div>
-      </div>
-      <p class="foot-bio">Client success &amp; executive operations with a creative eye — reporting, SOPs and brand work that make your business look sharp.</p>
+            <div class="foot-brand"><img class="foot-logo-img" src="assets/prime-kreatives-footer-logo.png" alt="Prime Kreatives - Where vision meets execution"></div>
+<p class="foot-bio">Client success &amp; executive operations with a creative eye — reporting, SOPs and brand work that make your business look sharp.</p>
       <div class="foot-social">
         <a href="https://github.com/guess-access" target="_blank" rel="noopener" aria-label="GitHub"><img src="https://cdn.simpleicons.org/github/DDB568" alt="GitHub"></a>
         <a href="https://www.facebook.com/prime.kreatives17" target="_blank" rel="noopener" aria-label="Facebook"><img src="https://cdn.simpleicons.org/facebook/DDB568" alt="Facebook"></a>
         <a href="https://www.instagram.com/prime.kreatives" target="_blank" rel="noopener" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram/DDB568" alt="Instagram"></a>
+        <a href="https://prime-kreatives.netlify.app/" target="_blank" rel="noopener" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="#DDB568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg></a>
       </div>
     </div>
     <div>
@@ -469,7 +471,7 @@
       </div>
     </div>
   </div>
-  <div class="foot-base">&copy; <span>2024</span> Prime Kreatives. All rights reserved.</div>
+  <div class="foot-base">&copy; <span>2024</span> Prime Kreatives. All rights reserved. <span class="foot-sep">·</span> <a href="privacy-policy.html">Privacy</a> <span class="foot-sep">·</span> <a href="terms-legal-policy.html">Terms</a></div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
